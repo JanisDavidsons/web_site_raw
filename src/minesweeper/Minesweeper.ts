@@ -9,7 +9,9 @@ export class Cell {
   isBomb: boolean = false;
   isFlag: boolean = false;
   isUnsure: boolean = false;
-  coordinates: number[] = [];
+  //coordinates: number[] = [];
+  coordinateX:number=0;
+  coordinateY:number=0;
 }
 
 export class Minesweeper {
@@ -47,7 +49,8 @@ export class Minesweeper {
       for (let j = 0; j < this.level.rows; j++) {
         this.cells[i][j] = new Cell();
         //recording each cells coordinates
-        this.cells[i][j].coordinates.push(i, j);
+        this.cells[i][j].coordinateX = i;
+        this.cells[i][j].coordinateY = j;
       }
     }
   }
@@ -323,7 +326,7 @@ export class Minesweeper {
     this.cells.map((obj) => {
       obj.forEach(element => {
         if (element.isBomb) {
-          bombsLeft.push(element.coordinates)
+          bombsLeft.push(new Array(element.coordinateX,element.coordinateY))
         }
       });
     });
@@ -336,7 +339,7 @@ export class Minesweeper {
     this.cells.map((obj) => {
       obj.forEach(element => {
         if (element.mines === 0 && !element.isBomb) {
-          emptyCells.push(element.coordinates)
+          emptyCells.push(new Array(element.coordinateX, element.coordinateY))
         }
       });
     });
@@ -349,7 +352,7 @@ export class Minesweeper {
     this.cells.map((obj) => {
       obj.forEach(element => {
         if (!element.isOpen && !element.isBomb) {
-          closedCells.push(element.coordinates)
+          closedCells.push(new Array(element.coordinateX,element.coordinateY))
         }
       });
     });
