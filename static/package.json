@@ -1,0 +1,24 @@
+{
+  "name": "my_web_page",
+  "version": "1.0.0",
+  "main": "index.html",
+  "dependencies": {
+    "cssnano": "^4.1.10",
+    "typescript": "^3.7.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JanisDavidsons/javaScript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JanisDavidsons/javaScript/issues"
+  },
+  "homepage": "https://github.com/JanisDavidsons/javaScript#readme",
+  "description": ""
+}
