@@ -1,7 +1,20 @@
+
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+    font-family: Arial;
+}
+
+
 body, h1, h2,h3 a, ul3 li {
     margin: 0;
     font-family: Arial;
     padding: 0;
+    width: 100%;
 }
 
 .banner {
@@ -16,6 +29,7 @@ body, h1, h2,h3 a, ul3 li {
 }
 
 header {
+    max-width: 100%;
     position: fixed;
     text-align: center;
     background-color: #0c1ca8;
@@ -27,6 +41,7 @@ header {
 }
 
 header h1 {
+    max-width: 70%;
     color: white;
     border: 2px solid #5968ec;
     padding: 6px 12px;
@@ -54,6 +69,7 @@ header h1 {
 }
 
 nav {
+    max-width: 100%;
     background-color: #f4f4f4;
     padding: 15px 20%;
     position: sticky;
@@ -63,16 +79,19 @@ nav {
 
 nav ul {
     white-space: nowrap;
-    max-width: 1000px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
 nav li {
-    width: 25%;
+    min-width: 48px;
+    min-height: 48px;
+
     display: inline-block;
 }
 
 nav li a {
+    width: 100%;
     text-decoration: none;
     font-size:16px;
     background-color: #0c1ca8;
@@ -84,6 +103,86 @@ nav li a {
 nav li a.join {
     color: #f0db1c;
 }
+
+@media screen and (max-width: 1400px) {
+    .banner .welcome h2 {
+        font-size: 15px;
+    }
+    .banner .welcome {
+        top: 35%;
+    }
+    li {
+        font-size: 10px;
+    }
+}
+
+
+
+@media screen and (max-width: 550px) {
+    header h1 {
+        font-size: 1em;
+    }
+
+    .mainContent p {
+        line-height:150%
+    }
+
+    .banner .welcome br {
+        display: none;
+        
+    }
+
+    .banner img {
+        height: 200px;
+    }
+
+
+
+    nav {
+        top: 110px;
+        padding: 15px 0 0 0;
+        position: static;
+        z-index: 5;
+    }
+
+    
+    nav ul {
+        white-space: nowrap;
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    nav li {
+        min-width: 48px;
+        min-height: 48px;
+    
+        display: block;
+    }
+    
+    nav li a {
+        width: 100%;
+        text-decoration: none;
+        font-size:16px;
+        background-color: #0c1ca8;
+        padding: 10px;
+        border-radius: 5px;
+        color:white;
+    }
+
+
+    .images li{
+        display: block;
+        width: 100%;
+        margin: 25px auto;
+    }
+
+    .mainContent {
+        width: 90%;
+        margin: 5px 5px;
+        padding: 0 20px;
+    }
+}
+
 
 main {
     max-width: 100%;
@@ -109,20 +208,8 @@ article p {
     /* white-space: nowrap; */
 }
 
-.iframe li {
-    display: inline-block;
-    /* width: 90%;
-    margin: 20px 5%; */
-}
-iframe
-{
-    
-    position: relative;;
-    top:0px;
-    left:20%;
-    width:450px;
-    height:450px;
-}
+
+
 
 iframe:focus {
     outline: none;
@@ -194,8 +281,8 @@ article p::first-line {
 }
 
 section.join p::first-letter {
-    font-size: 1.5em;
-    font-weight: bold;
+    /* font-size: 1.5em; */
+    /* font-weight: bold; */
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -203,40 +290,6 @@ p::selection {
     background-color: #f63232;
     color: white;
 }
-
-/* p::after {
-    content: '...';
-} */
-
-@media screen and (max-width: 1400px) {
-    .banner .welcome h2 {
-        font-size: 15px;
-    }
-    .banner .welcome {
-        top: 35%;
-    }
-    li {
-        font-size: 10px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .banner .welcome {
-        position: relative;
-        max-width: 100%;
-        text-align: center;
-    }
-    .banner .welcome br {
-        display: none;
-    }
-    .images li{
-        display: block;
-        width: 100%;
-        margin: 25px auto;
-    }
-}
-
-
 
 * {
     user-select: none
@@ -332,27 +385,20 @@ p::selection {
 
 /* [IMAGE] */
 .zoomImage {
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50%;
+    max-height: 50%; */
+    cursor: pointer;
+
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-    height: auto;
-    cursor: pointer;
   }
   
-  /* [LIGHTBOX] */
-  #lb-back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.4s;
-  }
+
   #lb-back.show {
     visibility: visible;
     opacity: 1;
@@ -363,4 +409,88 @@ p::selection {
 
   main article h3 {
     text-align: center;
+  }
+
+
+
+
+  /* Resizing picture to full screen on click */
+  /* Style the Image Used to Trigger the Modal */
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  #myImg:hover {opacity: 0.7;}
+  
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  }
+  
+  /* Modal Content (Image) */
+  .modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+  }
+  
+  /* Caption of Modal Image (Image Text) - Same Width as the Image */
+  #caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+  }
+  
+  /* Add Animation - Zoom in the Modal */
+  .modal-content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+  }
+  
+  @keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+  }
+  
+  /* The Close Button */
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* 100% Image Width on Smaller Screens */
+  @media only screen and (max-width: 700px){
+    .modal-content {
+      width: 100%;
+    }
   }

@@ -118,55 +118,66 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"javasScript/zoomPicture.js":[function(require,module,exports) {
-// This function will show the image in the lightbox
-var zoomImg = function zoomImg() {
-  // Create evil image clone
-  var clone = this.cloneNode();
-  clone.classList.remove("zoomImage"); // Put evil clone into lightbox
+// let browserWindowWidth;
+// let browserWindowHeight;
+//   function displayWindowSize(){
+//     // Get width and height of the window excluding scrollbars
+//     browserWindowWidth = document.documentElement.clientWidth;
+//     browserWindowHeight = document.documentElement.clientHeight;
+//     console.log("Width: " + browserWindowWidth + ", " + "Height: " + browserWindowHeight);
+// }
+// // Attaching the event listener function to window's resize event
+// window.addEventListener("resize", displayWindowSize);
+// // Calling the function for the first time
+// displayWindowSize();
+// if (browserWindowWidth>800) {
+//   console.log('image zoom available')
+// // This function will show the image in the lightbox
+// var zoomImg = function () {
+//   // Create evil image clone
+//   var clone = this.cloneNode();
+//   clone.classList.remove("zoomImage");
+//   // Put evil clone into lightbox
+//   var lb = document.getElementById("lb-img");
+//   lb.innerHTML = "";
+//   lb.appendChild(clone);
+//   // Show lightbox
+//   lb = document.getElementById("lb-back");
+//   lb.classList.add("show");
+// };
+// window.addEventListener("load", function(){
+//   // Attach on click events to all .zoomImage images
+//   var images = document.getElementsByClassName("zoomImage");
+//   if (images.length>0) {
+//     for (var img of images) {
+//       img.addEventListener("click", zoomImg);
+//     }
+//   }
+//   // Click event to hide the lightbox
+//   document.getElementById("lb-back").addEventListener("click", function(){
+//     this.classList.remove("show");
+//   })
+// });
+// }
+// Get the modal
+var modal = document.getElementById("myModal"); // Get the image and insert it inside the modal - use its "alt" text as a caption
 
-  var lb = document.getElementById("lb-img");
-  lb.innerHTML = "";
-  lb.appendChild(clone); // Show lightbox
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
 
-  lb = document.getElementById("lb-back");
-  lb.classList.add("show");
+img.onclick = function () {
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}; // Get the <span> element that closes the modal
+
+
+var span = document.getElementsByClassName("close")[0]; // When the user clicks on <span> (x), close the modal
+
+span.onclick = function () {
+  modal.style.display = "none";
 };
-
-window.addEventListener("load", function () {
-  // Attach on click events to all .zoomImage images
-  var images = document.getElementsByClassName("zoomImage");
-
-  if (images.length > 0) {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = images[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var img = _step.value;
-        img.addEventListener("click", zoomImg);
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return != null) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
-  } // Click event to hide the lightbox
-
-
-  document.getElementById("lb-back").addEventListener("click", function () {
-    this.classList.remove("show");
-  });
-});
 },{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -195,7 +206,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43771" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34413" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

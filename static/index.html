@@ -1,7 +1,16 @@
 <html lang="en">
   <head>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
+    <script src="javasScript/P5_circles.js"></script>
+    <script src="javasScript/long-press-event.min.js"></script>
+    
+
+
     <title>Programming</title>
   </head>
 
@@ -29,43 +38,77 @@
       </ul>
     </nav>
 
-    <main>
+    <main class="mainContent">
       <article>
         <h2>Web site develop by Janis Davidsons</h2>
         <p>
+          <br />
           I created this webpage to store and reviev my programming studies and
           progress. <br />
           In the beginning it might look weird or unfinished, but as my
           knowledge grows - webpage will develop.<br /><br />
-          <h3>P5.js library</h3>
+        </p>
+
+        <h3>P5.js library</h3>
+        <p>
+          
           &nbsp Below is small experiment, which I made while learned javaScript
           objects. I made a circle class, from which circle objects are made.
           Press left mouse button to create more circle instaces from circle
           function constructor. Random size and color circle will apear on
           screen where mouse is ponted. Refresh page to clear circles.
         </p>
-        <iframe
-          src="https://editor.p5js.org/Janis_Davidsons/embed/Bm3pF2_UV"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
+
+          <div 
+             id = "p5sketch"> <!--circle project goes here. -->
+          </div>
+
         <p>
-          I used P5.js library and it`s editor to make this. Make sure to check
+          Code snipet of circle project<br />
+          I used P5.js library to make this. Make sure to check
           this out --><a id="external_link" href="https://p5js.org/"
             >p5.js javaScript library</a
           ><br />
           Here is code for this program.<br />
 
         </p>
-        <!-- [LIGHTBOX CONTAINER] -->
-        <div id="lb-back">
-          <div id="lb-img"></div>
+
+
+        <!-- Trigger the Modal -->
+        <img id="myImg" src="../static/img/circleCode.png" alt="Snow" style="width:100%;max-width:300px">
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+          <!-- The Close Button -->
+          <span class="close">&times;</span>
+
+          <!-- Modal Content (The Image) -->
+          <img class="modal-content" id="img01">
+
+          <!-- Modal Caption (Image Text) -->
+          <div id="caption"></div>
         </div>
+
+        <script src="javasScript/zoomPicture.js"></script>
+
+
+
+
+
+
+        <!-- [LIGHTBOX CONTAINER] -->
+        <!-- <div id="lb-back"> -->
+          <!-- <div id="lb-img"></div> -->
+        <!-- </div> -->
+
         <!-- [THE IMAGES] -->
-        <img src="../static/img/circleCode.png" class="zoomImage" />
+        <!-- <img src="../static/img/circleCode.png" class="zoomImage" /> -->
+        
       </article>
 
       <article>
+        <br/><br/>
         <h2>About Codelex!</h2>
         <p>
           17th of february 2020 <br />
@@ -76,13 +119,15 @@
         were prepared only as sceleton that we had to build upon. Basicly we had to implement game logic. Now that was extremely engaging! 
         I would like to share those with you. Please remember, I`m actualy learning on the fly, which means - you 
         might find bugs on this website and also in those games. I have very poor programming experience, all of this is achieved by
-        by A LOT of work.</p><br/><br/><br/><br/>
+        by A LOT of work.</p><br/><br/>
       </article>
       <article>
         <h2>Update 14`th of march, 2020</h2>
         <p>
-          This website is static, all text you see here is written statically inside HTML document. As my knowledge grows and I`m getting more comfortable with 
-          PHP and databases, its time to move all text content to the MariaDB server and render content dynamically using PHP. I hope not to destroy this web site
+          This website is static, all text you see here is written manually inside HTML document. <br/>
+
+          &nbsp As my knowledge grows and I`m getting more comfortable with 
+          PHP and databases, its time to move all text content to the MariaDB server and render content dynamically using PHP. I hope not to destroy this web site by
            doing this. Also, I changed the editor in which I'm writing code - I moved from Visual Studio Code to PHP storm. 
           I'm not sure what to do with games written in Javascript, because after I wrote code Parcel is used to build it. Right now I have no idea how to do this
            in PHP storm. <br />
@@ -90,15 +135,17 @@
         </p>
       </article>
       <article>
+        <br/><br/>
         <h2>Web site develop by Janis Davidsons</h2>
         <p>
           I created this webpage to store and reviev my programming studies and
-          progress. <br />
+          progress.<br />
           In the beginning it might look weird or unfinished, but as my
           knowledge grows - webpage will develop.<br /><br />
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit dolore a vitae architecto nulla. Sequi asperiores, illum sint fugit aliquam nulla blanditiis suscipit ea sit quam ratione nobis? Deleniti, quae.
         </p>
       </article>
+      <br/><br/>
       <article>
         <h2>Web site develop by Janis Davidsons</h2>
         <p>
@@ -113,7 +160,9 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae iusto volupta
 
     <section class="join">
       <h2>If you want to get involved, join me!</h2>
-      <p>TODO: I have to finish this part of page</p>
+      <p>janis.davidsons@gmail.com<br/>
+            mob. +371 29604005
+      </p>
       <form>
         <input
           type="email"
@@ -127,6 +176,5 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae iusto volupta
     <footer>
       <p class="copy-right">copy-right 2020 Janis_Davidsons</p>
     </footer>
-    <script src="../static/javasScript/zoomPicture.js"></script>
   </body>
 </html>
