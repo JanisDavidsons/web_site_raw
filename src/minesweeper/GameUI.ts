@@ -2,7 +2,6 @@ import { Minesweeper, Cell } from "./Minesweeper";
 import { LEVELS } from "./levels";
 
 
-
 const cellWidth = 16;
 
 const cellClassName = (cell: Cell): string => {
@@ -34,6 +33,8 @@ const faceClassName = (minesweeper: Minesweeper) => {
   return "face-smile";
 };
 
+
+
 const getHundreds = (n: number) => Math.floor((n / 100) % 10);
 const getTens = (n: number) => Math.floor((n / 10) % 10);
 const getOnes = (n: number) => Math.floor(n % 10);
@@ -41,8 +42,9 @@ const elementById = (id: string) => document.getElementById(id) as HTMLElement;
 
 export class GameUI {
 
+  private isDraging = false;
   private delay:number=0;
-  private longpress:number = 500;
+  private longpress:number = 600;
   private pressTimer:number=0;
   private minesweeper: Minesweeper;
   private isMenuOpen: boolean = false;
@@ -137,38 +139,53 @@ export class GameUI {
     div.className = cellClassName(cell);
     minefield.appendChild(div);
 
-    div.addEventListener("mouseup", e => {
+    div.addEventListener("touchmove", e => {
+      clearTimeout(this.pressTimer);
+      clearTimeout(this.delay);
+      this.isDraging = true;
+
+    });
+
+    div.addEventListener('touchstart', e=> {
+      this.isDraging = false;
+      // Invoke the appropriate handler depending on the 
+      // number of touch points.
+      switch (e.touches.length) {
+        case 1: this.handle_one_touch(e,x,y); break;
+        case 2: this.handle_two_touches(e,x,y); break;
+        // case 3: handle_three_touches(e); break;
+        default: console.log("Not supported"); break;
+      }   
+    }, false);
+
+    div.addEventListener("mousedown", e => {
+      if (e.which === 3) {
+        e.stopPropagation();
+        return;
+      }
+      this.minesweeper.onLeftMouseDown();
+      this.draw();
+    });
+
+
+    div.addEventListener("touchend", e => {
+      if (!this.isDraging) {
       this.minesweeper.tense=false;
       clearTimeout(this.pressTimer);
       clearTimeout(this.delay);
       this.minesweeper.onRightMouseUp(x, y);
       this.draw();
+      }
+      e.preventDefault();
     });
 
-    div.addEventListener("mousedown", e => {
-      this.minesweeper.tense = true;
-      let $this = this.getThis();
-
-        
-        this.delay = setTimeout(this.holdingBtn, this.longpress,x,y);
-        this.draw();
-        //this.minesweeper.onLeftMouseUp(x, y);
-      
-
-      
-
-      
-      // this.pressTimer = window.setTimeout(function() {
-      //   $this.minesweeper.onRightMouseUp(x, y);
-      //   console.log('pressed for 1 second!');      
-      // },1000);
-
-      // if (e.which === 3) {
-      //   e.stopPropagation();
-      //   return;
-      // }
-      //this.minesweeper.onLeftMouseDown(x, y);
-      
+    div.addEventListener("mouseup", e => {
+      if (e.which === 3) {
+        this.minesweeper.onRightMouseUp(x, y);
+      } else {
+        this.minesweeper.onLeftMouseUp(x, y);
+      }
+      this.draw();
     });
   }
 
@@ -209,16 +226,19 @@ export class GameUI {
     return this;
   };
 
-
-
   holdingBtn=(x:number, y:number):void=>{
-    console.log('leftMouseUpCalled');
     let $this = this.getThis();
     $this.minesweeper.onLeftMouseUp(x, y)
     this.draw();
-    $this.minesweeper.onLeftMouseDown();
   }
 
+  handle_one_touch(touchObject:any,coordX:number,coordY:number){
+    this.minesweeper.tense = true; 
+    this.delay = setTimeout(this.holdingBtn, this.longpress,coordX,coordY);
+  }
+
+  handle_two_touches(touchObject:any,coordX:number,coordY:number){
+  }
 }
 
 const game = new GameUI();
