@@ -85,7 +85,7 @@ export class Minesweeper {
     return this.cells
   }
 
-  onLeftMouseDown(x: number, y: number) {
+  onLeftMouseDown() {
     this.tense = true;
   }
 
@@ -111,6 +111,7 @@ export class Minesweeper {
   }
 
   onRightMouseUp(x: number, y: number) {
+    console.log('right up!');
     if (this.isGameRunning() && this.cells[x][y].isOpen === false) {
       if (!this.cells[x][y].isFlag && !this.cells[x][y].isUnsure) {
         this.cells[x][y].isFlag = true;

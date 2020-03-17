@@ -1,6 +1,8 @@
 import { Minesweeper, Cell } from "./Minesweeper";
 import { LEVELS } from "./levels";
 
+
+
 const cellWidth = 16;
 
 const cellClassName = (cell: Cell): string => {
@@ -38,6 +40,10 @@ const getOnes = (n: number) => Math.floor(n % 10);
 const elementById = (id: string) => document.getElementById(id) as HTMLElement;
 
 export class GameUI {
+
+  private delay:number=0;
+  private longpress:number = 500;
+  private pressTimer:number=0;
   private minesweeper: Minesweeper;
   private isMenuOpen: boolean = false;
   private windowWrapperOuter = elementById("window-wrapper-outer");
@@ -57,6 +63,7 @@ export class GameUI {
     this.windowWrapperOuter.addEventListener("contextmenu", e =>
       e.preventDefault()
     );
+
     this.resetButton.addEventListener(
       "mousedown",
       () => (this.resetButton.className = "face-pressed")
@@ -129,21 +136,39 @@ export class GameUI {
     const div = document.createElement("div");
     div.className = cellClassName(cell);
     minefield.appendChild(div);
+
     div.addEventListener("mouseup", e => {
-      if (e.which === 3) {
-        this.minesweeper.onRightMouseUp(x, y);
-      } else {
-        this.minesweeper.onLeftMouseUp(x, y);
-      }
+      this.minesweeper.tense=false;
+      clearTimeout(this.pressTimer);
+      clearTimeout(this.delay);
+      this.minesweeper.onRightMouseUp(x, y);
       this.draw();
     });
+
     div.addEventListener("mousedown", e => {
-      if (e.which === 3) {
-        e.stopPropagation();
-        return;
-      }
-      this.minesweeper.onLeftMouseDown(x, y);
-      this.draw();
+      this.minesweeper.tense = true;
+      let $this = this.getThis();
+
+        
+        this.delay = setTimeout(this.holdingBtn, this.longpress,x,y);
+        this.draw();
+        //this.minesweeper.onLeftMouseUp(x, y);
+      
+
+      
+
+      
+      // this.pressTimer = window.setTimeout(function() {
+      //   $this.minesweeper.onRightMouseUp(x, y);
+      //   console.log('pressed for 1 second!');      
+      // },1000);
+
+      // if (e.which === 3) {
+      //   e.stopPropagation();
+      //   return;
+      // }
+      //this.minesweeper.onLeftMouseDown(x, y);
+      
     });
   }
 
@@ -178,7 +203,21 @@ export class GameUI {
       : "game-level";
     this.menuTemplate.className = 
       currentLevel.title === LEVELS[3].title ? "checked" : "game-level";
-}
+  }
+
+  getThis = () => {
+    return this;
+  };
+
+
+
+  holdingBtn=(x:number, y:number):void=>{
+    console.log('leftMouseUpCalled');
+    let $this = this.getThis();
+    $this.minesweeper.onLeftMouseUp(x, y)
+    this.draw();
+    $this.minesweeper.onLeftMouseDown();
+  }
 
 }
 

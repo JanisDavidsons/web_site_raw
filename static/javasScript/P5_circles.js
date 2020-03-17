@@ -1,6 +1,9 @@
 
 const b = ( sketch ) => {
 
+
+//----------------------------------This will dynamically change size of circle canvas------------------------------------------
+
   let canwasWindowWidth =sketch.windowWidth;
   let canvasWwindowHeight= sketch.windowWidth;
   
@@ -27,18 +30,16 @@ const b = ( sketch ) => {
     }   
     sketch.resizeCanvas(canwasWindowWidth, canwasWindowWidth);
   }
-  
 
+//----------------------------------color function constructor-------------------------------------------------------------
 
-
-  //color function constructor
 let Color = function () {
   this.r = sketch.random(0, 255);
   this.g = sketch.random(0, 255);
   this.b = sketch.random(0, 255);
 };
+//----------------------------------circle function constructor------------------------------------------------------------
 
-//circle function constructor
 let Circle = function (x, y, size, speedX, speedY, r, g, b) {
   this.x = x;
   this.y = y;
@@ -47,35 +48,39 @@ let Circle = function (x, y, size, speedX, speedY, r, g, b) {
   this.speedY = speedY;
   Color.call(this, r, g, b);
 }
+//----------------------------------method to change circle object speed on screeen----------------------------------------
 
-//method to change circle object speed on screeen
 Circle.prototype.changeSpeed = function () {
   this.speedX = sketch.random(0, 10);
   this.speedY = sketch.random(0, 10);
 }
-//method to change circle object x-direction on screeen
+//----------------------------------method to change circle object x-direction on screeen----------------------------------
+
 Circle.prototype.changeDirectionX = function () {
   this.speedX *= -1;
 }
-//method to change circle object y-direction on screeen
+//----------------------------------method to change circle object y-direction on screeen----------------------------------
+
 Circle.prototype.changeDirectionY = function () {
   this.speedY *= -1;
 }
 
-//function to move circle object on screeen
+//----------------------------------function to move circle object on screeen----------------------------------------------
+
 Circle.prototype.moveCircle = function () {
   this.x += this.speedX;
   this.y += this.speedY;
 }
 
-//function to draw circle object on screen
+//----------------------------------function to draw circle object on screen-----------------------------------------------
+
 Circle.prototype.drawObject = function () {
   sketch.fill(this.r, this.g, this.b);
-  //sketch.rect(this.x,this.y,this.size,this.size);
   sketch.ellipse(this.x, this.y, this.size);
 }
 
-//check if circle has reached end of screen, change move direction.
+//----------------------------------check if circle has reached end of screen, change move direction-----------------------
+
 Circle.prototype.changeDirection = function () {
   if (this.x > canwasWindowWidth-(this.size/2+20) || this.x < 0+(this.size/2)) {
     this.changeDirectionX();
@@ -85,7 +90,8 @@ Circle.prototype.changeDirection = function () {
   }
 }
 
-//check if circle has reached end of screen, change move direction.
+//----------------------------------check if circle has reached end of screen, change move direction------------------------
+
 Circle.prototype.isOutsideScreen = function () {
   if (this.x > canwasWindowWidth-(this.size/2+10)) {
     console.log('Of screen detectedd!');
@@ -98,9 +104,11 @@ Circle.prototype.isOutsideScreen = function () {
 
 let backgroundColor;
 
-//Array to hold cicle objects
+//----------------------------------Array to hold cicle objects-------------------------------------------------------------
+
 let circles = [];
 
+//----------------------------------project setup function------------------------------------------------------------------
 
 sketch.setup=()=> {
 
@@ -114,7 +122,8 @@ sketch.setup=()=> {
 
   //create circles instnce on startup
   for (i = 0; i < 2; i++) {
-    circles[i] = new Circle(sketch.random(100, sketch.windowWidth-100), sketch.random(100,sketch.windowHeight-100), sketch.random(10, 100), sketch.random(-5, 5), sketch.random(-5, 5));
+    circles[i] = new Circle(sketch.random(100, sketch.windowWidth-100), sketch.random(100,sketch.windowHeight-100)
+    , sketch.random(10, 100), sketch.random(-5, 5), sketch.random(-5, 5));
   }
 }
 
@@ -129,13 +138,13 @@ sketch.draw=()=>{
   }
 }
 
-//create circle object on mouse click.
+//----------------------------------create circle object on mouse click------------------------------------------------------
 sketch.mouseClicked=()=>{
   if ((sketch.mouseX>50&&sketch.mouseX<sketch.windowWidth-50)&&(sketch.mouseY>50&&sketch.mouseY<sketch.windowHeight-50)) {
-    circles.push(new Circle(sketch.mouseX, sketch.mouseY, sketch.random(10, 100), sketch.random(-5, 5), sketch.random(-5, 5)));
+      circles.push(new Circle(sketch.mouseX, sketch.mouseY, sketch.random(10, 100), sketch.random(-5, 5), sketch.random(-5, 5)));
+    }
   }
 }
-}
 
-
-let myp6 = new p5(b,'p5sketch');
+//----------------------------------Initializing project object--------------------------------------------------------------
+let circleObject = new p5(b,'p5sketch');
