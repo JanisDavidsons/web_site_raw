@@ -18,7 +18,7 @@ export const LEVELS: Level[] = [
     title: "Intermediate",
     rows: 25,
     columns: 25,
-    mines: 25,
+    mines: 70,
   },
   {
     title: "Expert",
